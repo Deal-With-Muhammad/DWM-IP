@@ -1,0 +1,115 @@
+@import "tailwindcss";
+@import "@heroui/styles";
+
+@source "../";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+  --color-brand: var(--brand);
+  --color-line: var(--line);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* The one line that differs between DWM tools: this site's brand colour. */
+:root {
+  --brand: #0891b2;
+}
+
+/* Theme tokens. Unlayered so they win over HeroUI's layered defaults. */
+:root,
+.light {
+  --background: oklch(0.982 0.003 250);
+  --foreground: oklch(0.21 0.015 260);
+  --surface: oklch(1 0 0);
+  --surface-secondary: oklch(0.968 0.004 250);
+  --overlay: oklch(1 0 0);
+  --muted: oklch(0.52 0.015 260);
+  --accent: var(--brand);
+  --accent-foreground: oklch(0.99 0 0);
+  --border: oklch(0.21 0.015 260 / 0.1);
+  --separator: oklch(0.21 0.015 260 / 0.08);
+  --field-background: oklch(0.97 0.004 250);
+  --focus: var(--accent);
+  --line: oklch(0.21 0.015 260 / 0.07);
+}
+
+.dark {
+  --background: oklch(0.15 0.008 260);
+  --foreground: oklch(0.965 0.004 260);
+  --surface: oklch(0.195 0.01 260);
+  --surface-secondary: oklch(0.23 0.01 260);
+  --overlay: oklch(0.21 0.01 260);
+  --muted: oklch(0.7 0.012 260);
+  --accent: color-mix(in oklab, var(--brand) 72%, white);
+  --accent-foreground: oklch(0.16 0.01 260);
+  --border: oklch(1 0 0 / 0.1);
+  --separator: oklch(1 0 0 / 0.08);
+  --field-background: oklch(0.24 0.01 260);
+  --default: oklch(0.26 0.01 260);
+  --default-foreground: var(--foreground);
+  --line: oklch(1 0 0 / 0.06);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-foreground);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+}
+
+/* Soft dot grid with a glow of the brand colour at the top of the page. */
+.page-backdrop {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 720px;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 60% 55% at 50% -10%,
+      color-mix(in oklab, var(--brand) 22%, transparent),
+      transparent
+    ),
+    radial-gradient(var(--line) 1px, transparent 1px) 0 0 / 22px 22px;
+  mask-image: linear-gradient(to bottom, black 40%, transparent);
+}
+
+/* Reserve the launcher's space before its script loads, so nothing shifts. */
+dwm-apps {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  flex: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

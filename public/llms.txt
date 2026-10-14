@@ -1,0 +1,52 @@
+# DWM IP
+
+> DWM IP (https://ip.dealwithmuhammad.com) is a free "what is my IP address" tool. It shows your public IPv4 and IPv6 address, approximate location, time zone, internet provider (ISP and ASN) and reverse DNS hostname, and looks up the network, owner and location of any IP address or domain. No ads, no sign-up, and IP addresses are never stored. It was built by Muhammad Ahmad, a web and mobile app developer in Kuala Lumpur, Malaysia.
+
+## What it does
+
+- **Your public IP** — the address websites see, shown at the top of the page as soon as it loads, with a copy button. IPv4 and IPv6 are detected separately (the browser checks IPv4-only and IPv6-only endpoints), so you can tell whether your connection supports IPv6.
+- **Location** — approximate city, region, country, postal code, time zone (with the local time there) and coordinates, plus a map. For your own IP this comes from the hosting edge network's IP geolocation; nothing is sent to a third-party geolocation service.
+- **Network** — internet provider name, autonomous system number (ASN) and the announced IP prefix (from Team Cymru's IP-to-ASN service), and the reverse DNS (PTR) hostname.
+- **Look up any IP or domain** — enter an IPv4/IPv6 address, a domain or a URL. Domains are resolved to their A/AAAA records. Shows the organisation, ASN, network range, network name, registered owner, regional internet registry (ARIN, RIPE NCC, APNIC, LACNIC or AFRINIC, via RDAP), abuse contact, hostname and approximate location (via GeoJS). Private, loopback, CGNAT, link-local, multicast and documentation addresses are recognised and explained instead.
+- **Browser & device** — browser, operating system, screen size, language and device time zone, with a hint when your device's time zone doesn't match your IP's location (a common sign of a VPN, proxy or iCloud Private Relay).
+- **Command line** — `curl ip.dealwithmuhammad.com` prints just your IP; `curl ip.dealwithmuhammad.com/json` returns IP, version, hostname, city, region, country, postal code, coordinates, time zone, ASN, organisation and network as JSON. Use `curl -4` or `curl -6` to choose the protocol. CORS is enabled.
+
+## Privacy
+
+- IP addresses are used only to answer the request and are never stored or logged by DWM IP.
+- The site counts anonymous page views (cookie-free) and has no ads or ad trackers.
+- Lookups of other IPs and domains query public sources: DNS, Team Cymru, RDAP registries and GeoJS.
+
+## Limits
+
+- IP geolocation is approximate: it often shows the provider's nearest hub rather than the user's exact town, and VPNs, proxies, Private Relay and mobile networks show their own location.
+- Reverse DNS and registry details depend on what the network's owner has published.
+
+## FAQ
+
+- **What is my IP address?** The public IP shown at the top of the page: the address websites see when you connect, assigned by your provider or VPN and usually shared by every device on your Wi-Fi.
+- **IPv4 vs IPv6?** IPv4 looks like 203.0.113.42; IPv6 looks like 2001:db8::1. If only IPv4 is shown, your network doesn't support IPv6 yet.
+- **Why is my IP location wrong?** IP location comes from databases mapping IP ranges to places and is an estimate; VPNs and mobile networks show their own location.
+- **Public vs private IP?** Your router gives devices private IPs like 192.168.1.20 that only work inside your network; the public IP is what the internet sees.
+- **Can someone find my address from my IP?** No. An IP reveals your provider and a rough area, not your street address.
+- **How do I hide or change my IP?** Use a VPN, proxy or Tor Browser, or restart your router / switch between Wi-Fi and mobile data.
+- **How do I get my IP in the terminal?** `curl ip.dealwithmuhammad.com` (plain text) or `curl ip.dealwithmuhammad.com/json`.
+- **Do you store my IP?** No.
+
+## Author
+
+- Name: Muhammad Ahmad — Web & Mobile App Developer, Kuala Lumpur, Malaysia
+- Portfolio: https://www.dealwithmuhammad.com
+- Case study: https://www.dealwithmuhammad.com/work/dwm-ip
+- Email: me@dealwithmuhammad.com
+- GitHub: https://github.com/Deal-With-Muhammad
+- LinkedIn: https://www.linkedin.com/in/muhammad-ahmad-7009b8248/
+
+## More free tools by the same author
+
+- [DWM Downloader](https://downloader.dealwithmuhammad.com): download videos from YouTube, Instagram, TikTok and more
+- [DWM Compressor](https://compressor.dealwithmuhammad.com): compress PDFs, images and video in the browser
+- [DWM QR](https://qr.dealwithmuhammad.com): custom QR codes with logos, colours, templates and expiry
+- [DWM BG Remover](https://bgremove.dealwithmuhammad.com): remove image backgrounds with AI in the browser
+- [DWM Email Checker](https://emailcheck.dealwithmuhammad.com): check if an email address exists
+- [Progress 2026](https://progress.dealwithmuhammad.com): a live counter of how much of the year has gone
