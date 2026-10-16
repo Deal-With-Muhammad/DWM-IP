@@ -1,8 +1,10 @@
+import Link from "next/link";
 import { ArrowUpRight, Globe, Mail } from "lucide-react";
 
 import { GithubIcon, LinkedinIcon } from "./brand-marks";
 import { VisitCounter } from "./visit-counter";
 import { AUTHOR, otherTools } from "@/lib/dwm";
+import { PAGE_LIST } from "@/lib/pages";
 import { site } from "@/lib/site";
 
 const textLink = "inline-flex items-center gap-1.5 rounded-sm transition-colors hover:text-accent";
@@ -17,10 +19,10 @@ export function SiteFooter() {
           <p className="text-sm font-semibold">
             Built by{" "}
             <a className="transition-colors hover:text-accent" href={AUTHOR.url} rel="author noopener">
-              {AUTHOR.name}
+              {AUTHOR.name}, web &amp; mobile app developer
             </a>
           </p>
-          <p className="text-xs text-muted">Web &amp; mobile app developer in {AUTHOR.location}</p>
+          <p className="text-xs text-muted">Based in {AUTHOR.location}</p>
           <div className="mt-1 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-muted sm:justify-start">
             <a className={textLink} href={AUTHOR.url} rel="noopener">
               <Globe className="size-3.5" aria-hidden /> dealwithmuhammad.com
@@ -56,13 +58,28 @@ export function SiteFooter() {
       </div>
 
       <nav
+        aria-label="IP tools"
+        className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-xs text-muted"
+      >
+        <span className="text-muted/80">IP tools:</span>
+        <Link className={textLink} href="/">
+          What is my IP address
+        </Link>
+        {PAGE_LIST.map((p) => (
+          <Link key={p.slug} className={textLink} href={`/${p.slug}`}>
+            {p.label}
+          </Link>
+        ))}
+      </nav>
+
+      <nav
         aria-label="More free tools by Muhammad Ahmad"
         className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-xs text-muted"
       >
         <span className="text-muted/80">More free tools:</span>
         {otherTools(site.id).map((t) => (
           <a key={t.id} className={textLink} href={t.url} title={t.blurb}>
-            {t.name}
+            {t.label}
           </a>
         ))}
       </nav>
@@ -71,6 +88,8 @@ export function SiteFooter() {
         <span>No ads, no sign-up</span>
         <span aria-hidden>·</span>
         <span>{site.privacyLine}</span>
+        <span aria-hidden>·</span>
+        <span>Updated {site.updatedLabel}</span>
         <VisitCounter />
       </div>
     </footer>

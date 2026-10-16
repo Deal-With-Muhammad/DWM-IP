@@ -1,8 +1,6 @@
 import { asnLookup, reverseDns } from "@/lib/network";
 import { getVisitor } from "@/lib/visitor";
 
-export const dynamic = "force-dynamic";
-
 const CORS = { "access-control-allow-origin": "*", "cache-control": "no-store" };
 
 /** `curl ip.dealwithmuhammad.com/json` → the visitor's IP with location, time zone and network. */

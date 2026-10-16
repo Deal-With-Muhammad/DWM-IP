@@ -10,14 +10,22 @@ Next.js 16 (App Router) · React 19 · HeroUI v3 · Tailwind CSS v4 · TypeScrip
 
 ## Data sources (all free, no API keys)
 
-| What | Source |
-| --- | --- |
-| Visitor IP + location | Vercel edge headers (`x-real-ip`, `x-vercel-ip-*`) |
-| ISP / ASN / prefix | Team Cymru IP-to-ASN over DNS |
-| Hostname | Reverse DNS (PTR) |
-| Owner, network, abuse contact | RDAP from the regional registry (fallback rdap.org) |
-| Location of looked-up IPs | GeoJS |
-| The "other" IP family | ipify (IPv4-only / IPv6-only endpoints, called from the browser) |
+| What                          | Source                                                           |
+| ----------------------------- | ---------------------------------------------------------------- |
+| Visitor IP + location         | Vercel edge headers (`x-real-ip`, `x-vercel-ip-*`)               |
+| ISP / ASN / prefix            | Team Cymru IP-to-ASN over DNS                                    |
+| Hostname                      | Reverse DNS (PTR)                                                |
+| Owner, network, abuse contact | RDAP from the regional registry (fallback rdap.org)              |
+| Location of looked-up IPs     | GeoJS                                                            |
+| The "other" IP family         | ipify (IPv4-only / IPv6-only endpoints, called from the browser) |
+
+## Pages
+
+- `/`: what is my IP (IPv4/IPv6, location, ISP, hostname, browser) plus lookup
+- `/ip-lookup`, `/domain-to-ip`: the lookup, preset for IPs or domains
+- `/what-is-my-isp`, `/what-is-my-ipv6`: your provider / your IPv6 status
+
+Copy for the landing pages lives in `src/lib/pages.ts`, the home page in `src/lib/site.ts`. With Cache Components (partial prerendering) each page's static shell is served from the CDN and the visitor-specific parts stream in (`src/components/ip/visitor-slots.tsx`).
 
 ## Endpoints
 

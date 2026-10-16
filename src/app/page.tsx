@@ -1,20 +1,26 @@
-import { headers } from "next/headers";
+import { Suspense } from "react";
 
 import { AboutSections } from "@/components/about-sections";
 import { BrowserInfo } from "@/components/ip/browser-info";
-import { IpHero } from "@/components/ip/ip-hero";
-import { LocationMap } from "@/components/ip/location-map";
 import { LookupPanel } from "@/components/ip/lookup-panel";
-import { VisitorDetails } from "@/components/ip/visitor-details";
+import {
+  DetailsSkeleton,
+  HeroSkeleton,
+  MapSkeleton,
+  VisitorBrowserInfo,
+  VisitorDetailsSlot,
+  VisitorHero,
+  VisitorMap,
+} from "@/components/ip/visitor-slots";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { placeLabel } from "@/lib/geo";
 import { buildJsonLd, jsonLdString } from "@/lib/seo";
-import { getVisitor } from "@/lib/visitor";
+import { site } from "@/lib/site";
 
-export default async function Home() {
-  const visitor = await getVisitor(await headers());
-
+// Everything outside <Suspense> is prerendered and served straight from the CDN;
+// the visitor's IP, location and network stream in from the server per request
+// (never cached, see components/ip/visitor-slots.tsx).
+export default function Home() {
   return (
     <div className="relative isolate">
       <div className="page-backdrop" aria-hidden />
@@ -23,30 +29,33 @@ export default async function Home() {
       <main id="main">
         <div className="mx-auto mt-8 flex w-full max-w-5xl flex-col gap-4 px-4 sm:mt-10 sm:px-6">
           <section
-            aria-label="Your IP address"
+            aria-labelledby="ip-title"
             className="grid grid-cols-1 gap-6 rounded-3xl border border-border bg-surface p-5 shadow-xl shadow-black/5 sm:p-7 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]"
           >
-            {visitor ? (
-              <>
-                <div className="flex min-w-0 flex-col gap-5">
-                  <IpHero visitor={visitor} />
-                  <VisitorDetails visitor={visitor} />
-                </div>
-                <LocationMap geo={visitor.geo} label={placeLabel(visitor.geo) || "your location"} />
-              </>
-            ) : (
-              <div className="lg:col-span-2">
-                <h1 className="text-xl font-semibold">What is my IP address?</h1>
-                <p className="mt-2 text-muted">
-                  We couldn&apos;t detect your IP address right now. Please reload the page in a moment.
-                </p>
+            <div className="flex min-w-0 flex-col gap-5">
+              <div className="flex flex-col gap-2">
+                <h1 id="ip-title" className="text-sm font-medium text-muted">
+                  What is my IP address?
+                </h1>
+                <Suspense fallback={<HeroSkeleton />}>
+                  <VisitorHero />
+                </Suspense>
               </div>
-            )}
+              <p className="text-sm leading-relaxed text-muted">{site.answer}</p>
+              <Suspense fallback={<DetailsSkeleton />}>
+                <VisitorDetailsSlot />
+              </Suspense>
+            </div>
+            <Suspense fallback={<MapSkeleton />}>
+              <VisitorMap />
+            </Suspense>
           </section>
 
           <div className="grid grid-cols-1 items-start gap-4 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
             <LookupPanel />
-            <BrowserInfo ipTimeZone={visitor?.geo?.timezone} />
+            <Suspense fallback={<BrowserInfo />}>
+              <VisitorBrowserInfo />
+            </Suspense>
           </div>
         </div>
         <AboutSections />

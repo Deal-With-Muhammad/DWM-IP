@@ -6,12 +6,20 @@ const CLI_AGENTS =
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  // Partial prerendering: each page's static shell is served from the CDN and the
+  // visitor-specific parts (their IP, location, ISP) stream in per request.
+  cacheComponents: true,
+  partialPrefetching: true,
   poweredByHeader: false,
   devIndicators: false,
   async rewrites() {
     return {
       beforeFiles: [
-        { source: "/", has: [{ type: "header", key: "user-agent", value: CLI_AGENTS }], destination: "/api/ip" },
+        {
+          source: "/",
+          has: [{ type: "header", key: "user-agent", value: CLI_AGENTS }],
+          destination: "/api/ip",
+        },
         { source: "/json", destination: "/api/json" },
       ],
       afterFiles: [],

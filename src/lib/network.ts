@@ -58,10 +58,10 @@ const TTL = 10 * 60 * 1000;
 
 async function cached<T>(key: string, fn: () => Promise<T>): Promise<T> {
   const hit = cache.get(key);
-  if (hit && Date.now() - hit.at < TTL) return hit.value as T;
+  if (hit && performance.now() - hit.at < TTL) return hit.value as T;
   const value = await fn();
   if (cache.size > 1000) cache.delete(cache.keys().next().value!);
-  cache.set(key, { at: Date.now(), value });
+  cache.set(key, { at: performance.now(), value });
   return value;
 }
 

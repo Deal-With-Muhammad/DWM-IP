@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Info, ShieldCheck } from "lucide-react";
 
 import { CopyButton } from "./copy-button";
 
@@ -21,7 +22,16 @@ async function probe(url: string): Promise<State> {
  * other family is checked from the browser against IPv4-only and IPv6-only
  * endpoints (ipify, a free open-source service).
  */
-export function DualStack({ serverIp, serverVersion }: { serverIp: string; serverVersion: 4 | 6 }) {
+export function DualStack({
+  serverIp,
+  serverVersion,
+  verdict = false,
+}: {
+  serverIp: string;
+  serverVersion: 4 | 6;
+  /** Also say in words whether the connection has IPv6 (the IPv6 page). */
+  verdict?: boolean;
+}) {
   const [v4, setV4] = useState<State>(
     serverVersion === 4 ? { status: "ok", ip: serverIp } : { status: "loading" },
   );
@@ -38,11 +48,41 @@ export function DualStack({ serverIp, serverVersion }: { serverIp: string; serve
     };
   }, [serverVersion]);
 
-  return (
+  const rows = (
     <dl className="grid gap-2 sm:grid-cols-2">
       <Row label="IPv4" state={v4} empty="Not detected" />
       <Row label="IPv6" state={v6} empty="Not available" />
     </dl>
+  );
+  if (!verdict) return rows;
+
+  return (
+    <div className="flex flex-col gap-3">
+      {rows}
+      <p
+        aria-live="polite"
+        className={`flex gap-2.5 rounded-2xl border p-3.5 text-sm ${
+          v6.status === "ok"
+            ? "border-success/30 bg-success/8"
+            : v6.status === "none"
+              ? "border-warning/40 bg-warning/10"
+              : "border-border bg-surface-secondary/60 text-muted"
+        }`}
+      >
+        {v6.status === "ok" ? (
+          <ShieldCheck className="mt-0.5 size-4 flex-none text-success" aria-hidden />
+        ) : v6.status === "none" ? (
+          <Info className="mt-0.5 size-4 flex-none text-warning" aria-hidden />
+        ) : null}
+        <span>
+          {v6.status === "ok"
+            ? "Your connection supports IPv6. Sites that offer IPv6 reach you over it."
+            : v6.status === "none"
+              ? "No IPv6 address detected, so this connection is IPv4 only. Everything still works; see below for why and what to check."
+              : "Checking for IPv6…"}
+        </span>
+      </p>
+    </div>
   );
 }
 

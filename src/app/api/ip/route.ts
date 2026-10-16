@@ -1,7 +1,5 @@
 import { getVisitor } from "@/lib/visitor";
 
-export const dynamic = "force-dynamic";
-
 const CORS = { "access-control-allow-origin": "*", "cache-control": "no-store" };
 
 /** `curl ip.dealwithmuhammad.com` → just the IP and a newline. */

@@ -6,8 +6,10 @@ import { ImageResponse } from "next/og";
 export const size = { width: 180, height: 180 };
 export const contentType = "image/png";
 
-export default async function AppleIcon() {
-  const svg = await readFile(join(process.cwd(), "public/icon.svg"));
+// Read at module scope so the icon is prerendered (see src/lib/og.tsx).
+const svg = await readFile(join(process.cwd(), "public/icon.svg"));
+
+export default function AppleIcon() {
   return new ImageResponse(
     <img src={`data:image/svg+xml;base64,${svg.toString("base64")}`} width={180} height={180} alt="" />,
     size,

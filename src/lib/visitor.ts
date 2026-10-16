@@ -1,5 +1,8 @@
 import "server-only";
 
+import { cache } from "react";
+import { headers } from "next/headers";
+
 import { classifyIp, clientIpFrom, geoFromHeaders, ipVersion, type Geo, type IpClass } from "./ip";
 import { geoLookup } from "./network";
 
@@ -33,3 +36,6 @@ async function publicIpOfThisMachine() {
   const res = await fetch("https://api64.ipify.org?format=json", { signal: AbortSignal.timeout(3000) });
   return ((await res.json()) as { ip: string }).ip;
 }
+
+/** The visitor of the current page request, shared by every component that needs it. */
+export const currentVisitor = cache(async () => getVisitor(await headers()));

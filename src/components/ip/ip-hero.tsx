@@ -13,8 +13,7 @@ export function IpHero({ visitor }: { visitor: Visitor }) {
   return (
     <div className="flex flex-col gap-5">
       <div>
-        <h1 className="text-sm font-medium text-muted">What is my IP address?</h1>
-        <div className="@container mt-2 flex items-center gap-3">
+        <div className="@container flex items-center gap-3">
           <output
             style={{ fontSize: `clamp(1.25rem, ${fit.toFixed(2)}cqi, 3.75rem)` }}
             className="min-w-0 font-mono leading-tight font-semibold tracking-tight break-all text-foreground"

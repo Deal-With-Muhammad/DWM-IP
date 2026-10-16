@@ -1,6 +1,14 @@
 # DWM IP
 
-> DWM IP (https://ip.dealwithmuhammad.com) is a free "what is my IP address" tool. It shows your public IPv4 and IPv6 address, approximate location, time zone, internet provider (ISP and ASN) and reverse DNS hostname, and looks up the network, owner and location of any IP address or domain. No ads, no sign-up, and IP addresses are never stored. It was built by Muhammad Ahmad, a web and mobile app developer in Kuala Lumpur, Malaysia.
+> DWM IP (https://ip.dealwithmuhammad.com) is a free "what is my IP address" website. Open it and it shows your public IPv4 and IPv6 address, approximate location and time zone, internet provider (ISP and ASN) and reverse DNS hostname; it also looks up the owner, network, registry, abuse contact and location of any IP address, and finds the IP addresses of any domain. It has no ads and no sign-up, IP addresses are never stored, and `curl ip.dealwithmuhammad.com` prints your IP in a terminal. Built by Muhammad Ahmad, a web and mobile app developer in Kuala Lumpur, Malaysia.
+
+## Pages
+
+- [What is my IP address](https://ip.dealwithmuhammad.com/): your public IPv4/IPv6, location, ISP, hostname, browser details and a lookup box.
+- [IP address lookup](https://ip.dealwithmuhammad.com/ip-lookup): owner, ISP/ASN, network range, registry, abuse contact, hostname and approximate location of any IPv4 or IPv6 address.
+- [Domain to IP lookup](https://ip.dealwithmuhammad.com/domain-to-ip): every A (IPv4) and AAAA (IPv6) address of a domain or URL, and the network behind the first one.
+- [What is my ISP](https://ip.dealwithmuhammad.com/what-is-my-isp): the internet provider, ASN and IP range of your current connection.
+- [What is my IPv6 address](https://ip.dealwithmuhammad.com/what-is-my-ipv6): your IPv6 and IPv4 addresses side by side, and whether your connection supports IPv6.
 
 ## What it does
 
@@ -9,7 +17,7 @@
 - **Network** — internet provider name, autonomous system number (ASN) and the announced IP prefix (from Team Cymru's IP-to-ASN service), and the reverse DNS (PTR) hostname.
 - **Look up any IP or domain** — enter an IPv4/IPv6 address, a domain or a URL. Domains are resolved to their A/AAAA records. Shows the organisation, ASN, network range, network name, registered owner, regional internet registry (ARIN, RIPE NCC, APNIC, LACNIC or AFRINIC, via RDAP), abuse contact, hostname and approximate location (via GeoJS). Private, loopback, CGNAT, link-local, multicast and documentation addresses are recognised and explained instead.
 - **Browser & device** — browser, operating system, screen size, language and device time zone, with a hint when your device's time zone doesn't match your IP's location (a common sign of a VPN, proxy or iCloud Private Relay).
-- **Command line** — `curl ip.dealwithmuhammad.com` prints just your IP; `curl ip.dealwithmuhammad.com/json` returns IP, version, hostname, city, region, country, postal code, coordinates, time zone, ASN, organisation and network as JSON. Use `curl -4` or `curl -6` to choose the protocol. CORS is enabled.
+- **Command line** — `curl ip.dealwithmuhammad.com` prints just your IP; `curl ip.dealwithmuhammad.com/json` returns IP, version, hostname, city, region, country, postal code, coordinates, time zone, ASN, organisation and network as JSON. The site is reached over IPv4, so the terminal shows your IPv4 address (the browser page checks IPv6 separately). CORS is enabled.
 
 ## Privacy
 
@@ -30,7 +38,9 @@
 - **Public vs private IP?** Your router gives devices private IPs like 192.168.1.20 that only work inside your network; the public IP is what the internet sees.
 - **Can someone find my address from my IP?** No. An IP reveals your provider and a rough area, not your street address.
 - **How do I hide or change my IP?** Use a VPN, proxy or Tor Browser, or restart your router / switch between Wi-Fi and mobile data.
-- **How do I get my IP in the terminal?** `curl ip.dealwithmuhammad.com` (plain text) or `curl ip.dealwithmuhammad.com/json`.
+- **Why does my IP change?** Most home and mobile connections get dynamic IPs; restarting the router, switching networks or toggling a VPN changes it.
+- **How can I tell if my VPN is working?** Compare the page with the VPN off and on: the IP, location and provider should all change. The page also flags when your device time zone doesn't match your IP's location.
+- **How do I get my IP in the terminal?** `curl ip.dealwithmuhammad.com` (plain text, IPv4) or `curl ip.dealwithmuhammad.com/json`.
 - **Do you store my IP?** No.
 
 ## Author
@@ -44,9 +54,11 @@
 
 ## More free tools by the same author
 
-- [DWM Downloader](https://downloader.dealwithmuhammad.com): download videos from YouTube, Instagram, TikTok and more
-- [DWM Compressor](https://compressor.dealwithmuhammad.com): compress PDFs, images and video in the browser
-- [DWM QR](https://qr.dealwithmuhammad.com): custom QR codes with logos, colours, templates and expiry
-- [DWM BG Remover](https://bgremove.dealwithmuhammad.com): remove image backgrounds with AI in the browser
-- [DWM Email Checker](https://emailcheck.dealwithmuhammad.com): check if an email address exists
-- [Progress 2026](https://progress.dealwithmuhammad.com): a live counter of how much of the year has gone
+- [Free video downloader](https://downloader.dealwithmuhammad.com) (DWM Downloader): download videos from YouTube, Instagram, TikTok and more
+- [PDF & image compressor](https://compressor.dealwithmuhammad.com) (DWM Compressor): compress PDFs, images and video in the browser
+- [QR code generator](https://qr.dealwithmuhammad.com) (DWM QR): custom QR codes with logos, colours, templates and expiry
+- [Background remover](https://bgremove.dealwithmuhammad.com) (DWM BG Remover): remove image backgrounds with AI in the browser
+- [Email checker](https://emailcheck.dealwithmuhammad.com) (DWM Email Checker): check if an email address exists
+- [Year progress bar](https://progress.dealwithmuhammad.com) (Progress 2026): a live counter of how much of the year has gone
+
+Last updated: 2026-10-16

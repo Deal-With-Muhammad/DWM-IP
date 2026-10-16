@@ -13,7 +13,18 @@ import type { LookupResult } from "@/lib/network";
 
 const EXAMPLES = ["8.8.8.8", "1.1.1.1", "github.com", "2606:4700:4700::1111"];
 
-export function LookupPanel() {
+/** Lookup for any IP or domain. Landing pages pass their own heading, placeholder and examples. */
+export function LookupPanel({
+  title = "Look up any IP or domain",
+  description = "See who owns an address, where it's registered and its hostname.",
+  placeholder = "8.8.8.8 or example.com",
+  examples = EXAMPLES,
+}: {
+  title?: string;
+  description?: string;
+  placeholder?: string;
+  examples?: string[];
+}) {
   const [query, setQuery] = useState("");
   const [pending, setPending] = useState(false);
   const [result, setResult] = useState<LookupResult | null>(null);
@@ -59,11 +70,9 @@ export function LookupPanel() {
     >
       <div>
         <h2 id="lookup-title" className="text-lg font-semibold">
-          Look up any IP or domain
+          {title}
         </h2>
-        <p className="mt-1 text-sm text-muted">
-          See who owns an address, where it&apos;s registered and its hostname.
-        </p>
+        <p className="mt-1 text-sm text-muted">{description}</p>
       </div>
 
       <form
@@ -81,7 +90,7 @@ export function LookupPanel() {
         >
           <Label className="sr-only">IP address or domain</Label>
           <Input
-            placeholder="8.8.8.8 or example.com"
+            placeholder={placeholder}
             autoComplete="off"
             autoCapitalize="off"
             spellCheck={false}
@@ -97,7 +106,7 @@ export function LookupPanel() {
 
       <div className="flex flex-wrap items-center gap-1.5 text-xs text-muted">
         <span>Try:</span>
-        {EXAMPLES.map((ex) => (
+        {examples.map((ex) => (
           <button
             key={ex}
             type="button"

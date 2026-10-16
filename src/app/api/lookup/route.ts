@@ -2,8 +2,6 @@ import { clientIpFrom } from "@/lib/ip";
 import { lookup } from "@/lib/network";
 import { rateLimit } from "@/lib/rate-limit";
 
-export const dynamic = "force-dynamic";
-
 /** GET /api/lookup?q=8.8.8.8 or ?q=example.com */
 export async function GET(request: Request) {
   const q = new URL(request.url).searchParams.get("q") ?? "";
