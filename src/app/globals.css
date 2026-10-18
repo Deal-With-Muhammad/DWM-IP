@@ -15,7 +15,7 @@
 
 /* The one line that differs between DWM tools: this site's brand colour. */
 :root {
-  --brand: #0891b2;
+  --brand: #1a7fbf;
 }
 
 /* Theme tokens. Unlayered so they win over HeroUI's layered defaults. */

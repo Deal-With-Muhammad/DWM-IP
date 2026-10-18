@@ -17,7 +17,7 @@ export const site: SiteConfig = {
   tagline: "Your public IP, location and ISP, instantly",
   appDescription:
     "A free tool that shows your public IPv4 and IPv6 address, approximate location, time zone, internet provider (ASN) and reverse DNS hostname, and looks up the network, owner and location of any IP address or domain.",
-  color: "#0891b2",
+  color: "#1a7fbf",
   keywords: [
     "what is my ip",
     "what is my ip address",
