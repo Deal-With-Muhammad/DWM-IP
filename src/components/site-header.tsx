@@ -9,7 +9,7 @@ export function SiteHeader() {
     <header className="mx-auto flex w-full max-w-5xl items-center justify-between gap-3 px-4 pt-5 sm:px-6 sm:pt-7">
       <Link href="/" className="flex min-w-0 items-center gap-3 rounded-xl" aria-label={`${site.name} home`}>
         <span className="grid size-10 flex-none place-items-center rounded-xl bg-brand text-white shadow-lg shadow-brand/25">
-          <BrandIcon className="size-5" />
+          <BrandIcon className="size-10" />
         </span>
         <span className="min-w-0">
           <span className="block text-base leading-tight font-semibold">{site.name}</span>
