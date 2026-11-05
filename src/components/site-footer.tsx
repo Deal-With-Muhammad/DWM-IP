@@ -84,6 +84,18 @@ export function SiteFooter() {
         ))}
       </nav>
 
+      <nav
+        aria-label="Legal"
+        className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-xs text-muted"
+      >
+        <Link className={textLink} href="/privacy">
+          Privacy Policy
+        </Link>
+        <Link className={textLink} href="/terms">
+          Terms of Use
+        </Link>
+      </nav>
+
       <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[11px] text-muted">
         <span>No ads, no sign-up</span>
         <span aria-hidden>·</span>
